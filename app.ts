@@ -7,6 +7,7 @@ import logger from 'morgan';
 
 import { router as indexRouter } from './routes/index';
 import { router as usersRouter } from './routes/users';
+import { router as execbatRouter} from './routes/execbat';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/execbat', execbatRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => next(createHttpError(404)));
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

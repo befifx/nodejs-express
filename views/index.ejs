@@ -3,8 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <title>タイトル</title>
+    <!-- <script type="text/javascript" src="javascript/execpost.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      const execbat = () => {
+        const inputPath = $('#input-path').val();
+        const outputPath = $('#output-path').val();
 
-    <link rel="stylesheet" href="../public/stylesheets/style.css" />
+        $.post({
+          type: 'POST',
+          url: 'http://localhost:3000/execbat',
+          data: JSON.stringify({
+            input: inputPath,
+            output: outputPath,
+          }),
+          contentType: 'application/json',
+        })
+          .done(function (data) {
+            console.log('success');
+          })
+          .fail(function () {
+            console.log('fail');
+          });
+      };
+
+      const onSuccess = (data, textStatus, jqXHRn) => {
+        console.log('success!!');
+      };
+    </script>
+    <link rel="stylesheet" href="stylesheets/style.css" />
   </head>
 
   <body>
@@ -17,7 +44,7 @@
         <input type="text" id="output-path" />:output
       </div>
       <div class="button-area">
-        <button id="submit-button" type="button" value="">csv</button>
+        <button id="submit-button" type="button" onclick="execbat();" value="">csv</button>
       </div>
     </div>
   </body>
